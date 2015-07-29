@@ -22,7 +22,6 @@ def pet_to_asc_c(in_char):
         return -1
     ret = tables.petToAscTable[ord(in_char)]
     logging.info("pet character: " + str(ord(in_char)) + " to " + str(chr(ret)))
-    print("the pet character: " + str(ord(in_char)) + " to " + str(chr(ret)))
     return ret
 
 
@@ -49,7 +48,6 @@ def asc_to_pet_c(in_char):
         return -1
     ret = tables.ascToPetTable[ord(in_char)]
     logging.info("ascii character: " + str(in_char) + " to " + str(ret))
-    print("ascii character: " + str(in_char) + " to " + str(ret))
     return ret
 
 
@@ -63,7 +61,6 @@ def asc_to_pet_s(in_str):
     ret = []
     for in_char in in_str:
         ret.append(asc_to_pet_c(in_char))
-    print ret
     return ret
 
 
@@ -73,13 +70,14 @@ def examples():
     Input: nothing
     Output: Side effect is that things are printed to the screen
     """
-    print(asc_to_pet_c('c'))
-    print(asc_to_pet_c('A'))
+    print("\n\nKEEP IN MIND THAT THE RETURN VALUE IS JUST AN INTEGER")
+    print("c in ascii to petscii: " + str(asc_to_pet_c('c')))
+    print("A in ascii to petscii: " + str(asc_to_pet_c('A')))
     print("")
-    print(asc_to_pet_s("hi there A"))
+    print("String 'hi there A' to petscii: " + str(asc_to_pet_s("hi there A")))
     print ("")
-    print(chr(pet_to_asc_c(67)))
-    print(chr(pet_to_asc_c(193)))
-    print(pet_to_asc_s('hi there'))
+    print("petscii 67 to ascii: " + str(chr(pet_to_asc_c(67))))
+    print("petscii 193 to ascii: " + str(chr(pet_to_asc_c(193))))
+    print("String 'hi there A' to ascii: " +  str(pet_to_asc_s('hi there A')))
 
-# examples()
+examples()

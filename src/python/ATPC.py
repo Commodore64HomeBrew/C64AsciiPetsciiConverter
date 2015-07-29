@@ -8,6 +8,13 @@ import logging
 
 logging.basicConfig(filename='conv.log',level=logging.DEBUG)
 
+def pet_to_asc_b_arr(in_bytes):
+    ret = []
+    for b in in_bytes:
+        ret.append(pet_to_asc_b(b))
+    return ret
+
+
 def pet_to_asc_b(in_byte):
     """
     Purpose: converts PETSCII byte/unicode to ASCII
@@ -17,6 +24,13 @@ def pet_to_asc_b(in_byte):
     ret = tables.petToAscTable[in_byte]
     logging.debug("petscii byte: %s to %s"%(in_byte,ret))
     return ret
+
+def asc_to_pet_b_arr(in_bytes):
+    ret = []
+    for b in in_bytes:
+        ret.append(asc_to_pet_b(b))
+    return ret
+
 
 def asc_to_pet_b(in_byte):
     """
@@ -160,5 +174,20 @@ def examples():
     print "From ascii Translated to petscii %s"%tr_msg
     print ""
     print "this is the behaviour i would expect ... thanks andi"
+    print ""
+    print ""
+    print "Lets try some byte arrays"
+    msg="hi there"
+    asc_bytes=[ord(elem) for elem in msg]
+    print "Got back ascii %s"%asc_bytes
+    print "Now lets translate the ascii bytes to petcii bytes"
+    tr_msg=''
+    pet_bytes = asc_to_pet_b_arr(asc_bytes)
+    
+    for b in pet_bytes:
+    #    b_trans = asc_to_pet_b(b)
+        tr_msg='%s%s'%(tr_msg,chr(b))
+        #print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print "From ascii Translated to petscii %s"%tr_msg
     
 examples()

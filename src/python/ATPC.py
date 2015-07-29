@@ -115,16 +115,24 @@ def examples():
     pet_bytes=asc_to_pet_s("HI THERE")
     print "Got back petscii %s"%pet_bytes
     print "Now lets translate the petscii bytes to ascii bytes"
+    tr_msg=''
     for b in pet_bytes:
         b_trans = pet_to_asc_b(b)
-        print "From petscii %s we got back ascii %s which as a character is %s"%(b,b_trans,chr(b_trans))
-    print "Great it works lets try a different ascii string of lower characters"
+        tr_msg='%s%s'%(tr_msg,chr(b_trans))
+        #print "From petscii %s we got back ascii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print "From ascii Translated to petscii %s"%tr_msg
+    print ("")
+    print "Great it works lets try a different ascii string 'hi there' of lower characters"
     pet_bytes=asc_to_pet_s("hi there")
     print "Got back petscii %s"%pet_bytes
+    print ("")
+    tr_msg=''
     print "Now lets translate the petscii bytes to ascii bytes"
     for b in pet_bytes:
         b_trans = pet_to_asc_b(b)
-        print "From petscii %s we got back ascii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+        tr_msg='%s%s'%(tr_msg,chr(b_trans))
+        #print "From petscii %s we got back ascii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print "From ascii Translated to petscii %s"%tr_msg
     print ("")
     print ("Lets get some ascii bytes of a 'HI THERE' ascii string")
     #asc_bytes=pet_to_asc_s("hi there")
@@ -132,16 +140,25 @@ def examples():
     asc_bytes=[ord(elem) for elem in msg]
     print "Got back ascii %s"%asc_bytes
     print "Now lets translate the ascii bytes to petcii bytes"
+    tr_msg=''
     for b in asc_bytes:
         b_trans = asc_to_pet_b(b)
-        print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
-    print "Great it works lets try a different ascii string of lower characters"
+        tr_msg='%s%s'%(tr_msg,chr(b_trans))
+        #print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print "From ascii Translated to petscii %s"%tr_msg
+    print ("")
+    print "Great it works lets try a different ascii string 'hi there' of lower characters"
     msg="hi there"
     asc_bytes=[ord(elem) for elem in msg]
     print "Got back ascii %s"%asc_bytes
     print "Now lets translate the ascii bytes to petcii bytes"
+    tr_msg=''
     for b in asc_bytes:
         b_trans = asc_to_pet_b(b)
-        print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+        tr_msg='%s%s'%(tr_msg,chr(b_trans))
+        #print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print "From ascii Translated to petscii %s"%tr_msg
+    print ""
+    print "this is the behaviour i would expect ... thanks andi"
     
 examples()

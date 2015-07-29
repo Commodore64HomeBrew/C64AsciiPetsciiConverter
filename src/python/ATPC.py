@@ -211,4 +211,4 @@ def examples():
     print("String 'hi there a' to ascii(String): " +  str(pet_to_asc_s("hi there a",result_type='string')))
     print("String 'HI THERE A' to petscii(String): " + str(asc_to_pet_s("HI THERE A",result_type='string')))
     print("String 'hi there a' to petscii(String): " + str(asc_to_pet_s("hi there a",result_type='string')))
-examples()
+#examples()

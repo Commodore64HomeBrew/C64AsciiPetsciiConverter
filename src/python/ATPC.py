@@ -80,4 +80,4 @@ def examples():
     print("petscii 193 to ascii: " + str(chr(pet_to_asc_c(193))))
     print("String 'hi there A' to ascii: " +  str(pet_to_asc_s('hi there A')))
 
-examples()
+#examples()

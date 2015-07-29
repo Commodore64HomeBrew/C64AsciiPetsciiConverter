@@ -21,9 +21,8 @@ class Test(unittest.TestCase):
     def testAscToPetString(self):
         send_test_msg="hi there is a dog over there"
         trans_msg="HI THERE IS A DOG OVER THERE"
-        result=str(self.conv.asc_to_pet_s(send_test_msg,result_type='string'))
-        #print result
-        self.assertEqual(result, trans_msg, "Messages are Not the same")
+        result= self.conv.asc_to_pet_s(send_test_msg,result_type='string')
+        self.assertEqual(result, trans_msg, "Message %s not as exprected %s"%(result,trans_msg))
         pass
 
 

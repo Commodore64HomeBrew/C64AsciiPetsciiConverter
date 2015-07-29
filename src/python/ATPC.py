@@ -49,4 +49,4 @@ def examples():
     pet_to_asc_c(193)
     pet_to_asc_s('hi there')
 
-examples()
+#examples()

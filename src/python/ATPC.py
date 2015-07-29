@@ -6,6 +6,7 @@ Purpose: Convert single character of ASCII to PETSCII and vice versa.
 import tables
 import logging
 
+logging.basicConfig(filename='conv.log',level=logging.DEBUG)
 
 def pet_to_asc_c(in_char):
     """
@@ -13,15 +14,16 @@ def pet_to_asc_c(in_char):
     Input: single character/hex value
     Output: returns hex value of ASCII character
     """
-    in_char = chr(in_char)
-    logging.info("in petToPetC")
+    
+    logging.debug("in petToAscC %s "%in_char)
+    
     if len(in_char) != 1:
         logging.warning("in pet_to_asc_c")
         logging.warning("you are calling the wrong function")
         logging.warning("parameter should be a single character")
         return -1
     ret = tables.petToAscTable[ord(in_char)]
-    logging.info("pet character: " + str(ord(in_char)) + " to " + str(chr(ret)))
+    logging.debug("pet character: " + str(ord(in_char)) + " to " + str(chr(ret)))
     return ret
 
 
@@ -31,7 +33,7 @@ def pet_to_asc_s(in_str):
     TODO: clearly this is not implemented yet
     """
     # not sure if you need this or what you'd pass in
-    logging.info("in pet_to_asc_s "+str(in_str))
+    logging.debug("in pet_to_asc_s "+str(in_str))
     ret = []
     for in_char in in_str:
         ret.append(pet_to_asc_c(in_char))
@@ -44,14 +46,14 @@ def asc_to_pet_c(in_char):
     Input: single character/hex value
     Output: returns hex value of PETSCII character
     """
-    logging.info("in asc_to_pet_c")
+    logging.debug("in asc_to_pet_c")
     if len(in_char) != 1:
         logging.warning("in asc_to_pet_c")
         logging.warning("you are calling the wrong function")
         logging.warning("parameter should be a single character")
         return -1
     ret = tables.ascToPetTable[ord(in_char)]
-    logging.info("ascii character: " + str(in_char) + " to " + str(ret))
+    logging.debug("ascii character: " + str(in_char) + " to " + str(ret))
     return ret
 
 
@@ -61,7 +63,7 @@ def asc_to_pet_s(in_str):
     Input: ASCII string
     Output: returns list of hex values of PETSCII characters
     """
-    logging.info("in asc_to_pet_s")
+    logging.debug("in asc_to_pet_s")
     ret = []
     for in_char in in_str:
         ret.append(asc_to_pet_c(in_char))
@@ -74,14 +76,17 @@ def examples():
     Input: nothing
     Output: Side effect is that things are printed to the screen
     """
+    logging.info("Lets Run some Test cases")
     print("\n\nKEEP IN MIND THAT THE RETURN VALUE IS JUST AN INTEGER")
     print("c in ascii to petscii: " + str(asc_to_pet_c('c')))
     print("A in ascii to petscii: " + str(asc_to_pet_c('A')))
     print("")
-    print("String 'hi there A' to petscii: " + str(asc_to_pet_s("hi there A")))
+    print("String 'hi there A' to petscii: " + str(asc_to_pet_s("HI THERE A")))
     print ("")
-    print("petscii 67 to ascii: " + str(chr(pet_to_asc_c(67))))
-    print("petscii 193 to ascii: " + str(chr(pet_to_asc_c(193))))
-    print("String 'hi there A' to ascii: " +  str(pet_to_asc_s('hi there A')))
+    print("petscii 'c' to ascii: " + str(pet_to_asc_c('c')))
+    print("petscii 'A' to ascii: " + str(pet_to_asc_c('A')))
+    print("String 'hi there A' to ascii: " +  str(pet_to_asc_s('HI THERE A')))
+    print ("")
+    
 
-#examples()
+examples()

@@ -8,16 +8,21 @@ import logging
 
 logging.basicConfig(filename='conv.log',level=logging.DEBUG)
 
-def pet_to_asc_b_arr(in_bytes):
+def pet_to_asc_b_arr(in_bytes,result_type='default'):
     """
     Purpose: converts PETSCII bytes to ASCII
     Input: array of bytes
-    Output: returns hex array of ASCII bytes
+    Output: returns hex array of ASCII bytes or a string (ascii) representation of bytes
     """
     ret = []
+    ret_str=''
     for b in in_bytes:
         ret.append(pet_to_asc_b(b))
-    return ret
+        ret_str="%s%s"%(ret_str,chr(pet_to_asc_b(b)))
+    if result_type == 'default':
+        return ret
+    else:
+        return ret_str
 
 
 def pet_to_asc_b(in_byte):
@@ -30,16 +35,21 @@ def pet_to_asc_b(in_byte):
     logging.debug("petscii byte: %s to %s"%(in_byte,ret))
     return ret
 
-def asc_to_pet_b_arr(in_bytes):
+def asc_to_pet_b_arr(in_bytes,result_type='default'):
     """
     Purpose: converts ASCII bytes to PETSCII
     Input: array of bytes
-    Output: returns hex array of PETSCII bytes
+    Output: returns hex array of PETSCII bytes or a string (which will be in ascii rep. but petscii byte) representation of bytes
     """
     ret = []
+    ret_str=''
     for b in in_bytes:
         ret.append(asc_to_pet_b(b))
-    return ret
+        ret_str="%s%s"%(ret_str,chr(asc_to_pet_b(b)))
+    if result_type == 'default':
+        return ret
+    else:
+        return ret_str
 
 
 def asc_to_pet_b(in_byte):
@@ -74,7 +84,8 @@ def pet_to_asc_c(in_char):
 def pet_to_asc_s(in_str,result_type='default'):
     """
     Purpose: converts PETSCII string to ASCII
-    
+    Input: PETSCII string
+    Output: returns list of hex values of ASCII characters or an Ascii String representation
     """
     # not sure if you need this or what you'd pass in
     logging.debug("in pet_to_asc_s "+str(in_str))
@@ -110,7 +121,7 @@ def asc_to_pet_s(in_str,result_type='default'):
     """
     Purpose: converts ASCII string to list of PETSCII hex values
     Input: ASCII string
-    Output: returns list of hex values of PETSCII characters
+    Output: returns list of hex values of PETSCII characters or an Ascii String representation
     """
     logging.debug("in asc_to_pet_s")
     ret = []
@@ -122,7 +133,10 @@ def asc_to_pet_s(in_str,result_type='default'):
         return ret
     else:
         return ret_str
-
+    
+#some other utilities
+def get_bytes(msg_str):
+    return [ord(elem) for elem in msg_str]
 
 def examples():
     """
@@ -165,7 +179,7 @@ def examples():
     print ("Lets get some ascii bytes of a 'HI THERE' ascii string")
     #asc_bytes=pet_to_asc_s("hi there")
     msg="HI THERE"
-    asc_bytes=[ord(elem) for elem in msg]
+    asc_bytes=get_bytes(msg)
     print "Got back ascii %s"%asc_bytes
     print "Now lets translate the ascii bytes to petcii bytes"
     tr_msg=''
@@ -211,4 +225,17 @@ def examples():
     print("String 'hi there a' to ascii(String): " +  str(pet_to_asc_s("hi there a",result_type='string')))
     print("String 'HI THERE A' to petscii(String): " + str(asc_to_pet_s("HI THERE A",result_type='string')))
     print("String 'hi there a' to petscii(String): " + str(asc_to_pet_s("hi there a",result_type='string')))
+    print ""
+    print ""
+    print "Lets try more function overloading"
+    print "get string (as ascii) from string(as pet) using 'ALL CAPS'"
+    print pet_to_asc_b_arr(get_bytes("ALL CAPS"),result_type='string')
+    print "get string (as ascii) from string(as pet) using 'no caps'"
+    print pet_to_asc_b_arr(get_bytes("no caps"),result_type='string')
+    print "get string (as petscii) from string(as asc) using 'ALL CAPS'"
+    print asc_to_pet_b_arr(get_bytes("ALL CAPS"),result_type='string')
+    print "get string (as ascii) from string(as pet) using 'no caps'"
+    print asc_to_pet_b_arr(get_bytes("no caps"),result_type='string')
+    
+    
 #examples()

@@ -71,17 +71,22 @@ def pet_to_asc_c(in_char):
     return ret
 
 
-def pet_to_asc_s(in_str):
+def pet_to_asc_s(in_str,result_type='default'):
     """
     Purpose: converts PETSCII string to ASCII
-    TODO: clearly this is not implemented yet
+    
     """
     # not sure if you need this or what you'd pass in
     logging.debug("in pet_to_asc_s "+str(in_str))
     ret = []
+    ret_str=''
     for in_char in in_str:
         ret.append(pet_to_asc_c(in_char))
-    return ret
+        ret_str="%s%s"%(ret_str,chr(pet_to_asc_c(in_char)))
+    if result_type == 'default':
+        return ret
+    else:
+        return ret_str
 
 
 def asc_to_pet_c(in_char):
@@ -101,7 +106,7 @@ def asc_to_pet_c(in_char):
     return ret
 
 
-def asc_to_pet_s(in_str):
+def asc_to_pet_s(in_str,result_type='default'):
     """
     Purpose: converts ASCII string to list of PETSCII hex values
     Input: ASCII string
@@ -109,9 +114,14 @@ def asc_to_pet_s(in_str):
     """
     logging.debug("in asc_to_pet_s")
     ret = []
+    ret_str=''
     for in_char in in_str:
         ret.append(asc_to_pet_c(in_char))
-    return ret
+        ret_str="%s%s"%(ret_str,chr(asc_to_pet_c(in_char)))
+    if result_type == 'default':
+        return ret
+    else:
+        return ret_str
 
 
 def examples():
@@ -122,15 +132,9 @@ def examples():
     """
     logging.info("Lets Run some Test cases")
     print("\n\nKEEP IN MIND THAT THE RETURN VALUE IS JUST AN INTEGER")
-    #print("c in ascii to petscii: " + str(asc_to_pet_c('c')))
-    #print("A in ascii to petscii: " + str(asc_to_pet_c('A')))
     print("")
     print("String 'HI THERE A' to petscii: " + str(asc_to_pet_s("HI THERE A")))
-    print ("")
     print("String 'hi there a' to petscii: " + str(asc_to_pet_s("hi there a")))
-    print ("")
-    #print("petscii 'c' to ascii: " + str(pet_to_asc_c('c')))
-    #print("petscii 'A' to ascii: " + str(pet_to_asc_c('A')))
     print ("Seems Wrong, but its actually correct since input is actually in ascii, not petscii")
     print("String 'HI THERE A' to ascii: " +  str(pet_to_asc_s('HI THERE A')))
     print("String 'hi there a' to ascii: " +  str(pet_to_asc_s('hi there a')))
@@ -199,5 +203,12 @@ def examples():
         tr_msg='%s%s'%(tr_msg,chr(b))
         #print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
     print "From ascii Translated to petscii %s"%tr_msg
-    
+    print ""
+    print ""
+    print "Lets try function overloading"
+    print("String 'HI THERE A' to ascii(String): " +  str(pet_to_asc_s("HI THERE A",result_type='string')))
+    print("String 'HI THERE A' to ascii(String) again: " +  str(pet_to_asc_s('HI THERE A',result_type='string')))
+    print("String 'hi there a' to ascii(String): " +  str(pet_to_asc_s("hi there a",result_type='string')))
+    print("String 'HI THERE A' to petscii(String): " + str(asc_to_pet_s("HI THERE A",result_type='string')))
+    print("String 'hi there a' to petscii(String): " + str(asc_to_pet_s("hi there a",result_type='string')))
 examples()

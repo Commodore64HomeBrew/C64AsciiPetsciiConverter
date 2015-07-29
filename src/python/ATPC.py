@@ -8,6 +8,26 @@ import logging
 
 logging.basicConfig(filename='conv.log',level=logging.DEBUG)
 
+def pet_to_asc_b(in_byte):
+    """
+    Purpose: converts PETSCII byte/unicode to ASCII
+    Input: single byte/hex value
+    Output: returns hex value of ASCII character
+    """
+    ret = tables.petToAscTable[in_byte]
+    logging.debug("petscii byte: %s to %s"%(in_byte,ret))
+    return ret
+
+def asc_to_pet_b(in_byte):
+    """
+    Purpose: converts PETSCII byte/unicode to ASCII
+    Input: single byte/hex value
+    Output: returns hex value of ASCII character
+    """
+    ret = tables.ascToPetTable[in_byte]
+    logging.debug("ascii byte: %s to %s"%(in_byte,ret))
+    return ret
+    
 def pet_to_asc_c(in_char):
     """
     Purpose: converts PETSCII character to ASCII
@@ -78,15 +98,50 @@ def examples():
     """
     logging.info("Lets Run some Test cases")
     print("\n\nKEEP IN MIND THAT THE RETURN VALUE IS JUST AN INTEGER")
-    print("c in ascii to petscii: " + str(asc_to_pet_c('c')))
-    print("A in ascii to petscii: " + str(asc_to_pet_c('A')))
+    #print("c in ascii to petscii: " + str(asc_to_pet_c('c')))
+    #print("A in ascii to petscii: " + str(asc_to_pet_c('A')))
     print("")
-    print("String 'hi there A' to petscii: " + str(asc_to_pet_s("HI THERE A")))
+    print("String 'HI THERE A' to petscii: " + str(asc_to_pet_s("HI THERE A")))
     print ("")
-    print("petscii 'c' to ascii: " + str(pet_to_asc_c('c')))
-    print("petscii 'A' to ascii: " + str(pet_to_asc_c('A')))
-    print("String 'hi there A' to ascii: " +  str(pet_to_asc_s('HI THERE A')))
+    print("String 'hi there a' to petscii: " + str(asc_to_pet_s("hi there a")))
     print ("")
+    #print("petscii 'c' to ascii: " + str(pet_to_asc_c('c')))
+    #print("petscii 'A' to ascii: " + str(pet_to_asc_c('A')))
+    print ("Seems Wrong, but its actually correct since input is actually in ascii, not petscii")
+    print("String 'HI THERE A' to ascii: " +  str(pet_to_asc_s('HI THERE A')))
+    print("String 'hi there a' to ascii: " +  str(pet_to_asc_s('hi there a')))
+    print ("")
+    print ("Lets get some petscii bytes of a 'HI THERE' ascii string")
+    pet_bytes=asc_to_pet_s("HI THERE")
+    print "Got back petscii %s"%pet_bytes
+    print "Now lets translate the petscii bytes to ascii bytes"
+    for b in pet_bytes:
+        b_trans = pet_to_asc_b(b)
+        print "From petscii %s we got back ascii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print "Great it works lets try a different ascii string of lower characters"
+    pet_bytes=asc_to_pet_s("hi there")
+    print "Got back petscii %s"%pet_bytes
+    print "Now lets translate the petscii bytes to ascii bytes"
+    for b in pet_bytes:
+        b_trans = pet_to_asc_b(b)
+        print "From petscii %s we got back ascii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print ("")
+    print ("Lets get some ascii bytes of a 'HI THERE' ascii string")
+    #asc_bytes=pet_to_asc_s("hi there")
+    msg="HI THERE"
+    asc_bytes=[ord(elem) for elem in msg]
+    print "Got back ascii %s"%asc_bytes
+    print "Now lets translate the ascii bytes to petcii bytes"
+    for b in asc_bytes:
+        b_trans = asc_to_pet_b(b)
+        print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
+    print "Great it works lets try a different ascii string of lower characters"
+    msg="hi there"
+    asc_bytes=[ord(elem) for elem in msg]
+    print "Got back ascii %s"%asc_bytes
+    print "Now lets translate the ascii bytes to petcii bytes"
+    for b in asc_bytes:
+        b_trans = asc_to_pet_b(b)
+        print "From ascii %s we got back petscii %s which as a character is %s"%(b,b_trans,chr(b_trans))
     
-
 examples()

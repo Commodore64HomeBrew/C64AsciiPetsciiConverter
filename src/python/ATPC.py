@@ -1,4 +1,8 @@
 """
+Created on Jul 28, 2015
+
+@author: andi bergen
+
 Purpose: Convert single character of ASCII to PETSCII and vice versa.
          Also converts string of ASCII to list of hex PETSCII values.
 """

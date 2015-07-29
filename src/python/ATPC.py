@@ -9,6 +9,11 @@ import logging
 logging.basicConfig(filename='conv.log',level=logging.DEBUG)
 
 def pet_to_asc_b_arr(in_bytes):
+    """
+    Purpose: converts PETSCII bytes to ASCII
+    Input: array of bytes
+    Output: returns hex array of ASCII bytes
+    """
     ret = []
     for b in in_bytes:
         ret.append(pet_to_asc_b(b))
@@ -26,6 +31,11 @@ def pet_to_asc_b(in_byte):
     return ret
 
 def asc_to_pet_b_arr(in_bytes):
+    """
+    Purpose: converts ASCII bytes to PETSCII
+    Input: array of bytes
+    Output: returns hex array of PETSCII bytes
+    """
     ret = []
     for b in in_bytes:
         ret.append(asc_to_pet_b(b))

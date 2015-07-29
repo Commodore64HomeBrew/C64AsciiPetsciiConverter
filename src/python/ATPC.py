@@ -32,6 +32,10 @@ def pet_to_asc_s(in_str):
     """
     # not sure if you need this or what you'd pass in
     logging.info("in pet_to_asc_s "+str(in_str))
+    ret = []
+    for in_char in in_str:
+        ret.append(pet_to_asc_c(in_char))
+    return ret
 
 
 def asc_to_pet_c(in_char):

@@ -30,15 +30,18 @@ def pet_to_asc_b_arr(in_bytes, result_type='default'):
         return ret_str
 
 
-def pet_to_asc_b(in_byte):
+def pet_to_asc_b(in_byte, result_type='default'):
     """
     Purpose: converts PETSCII byte/unicode to ASCII
     Input: single byte/hex value
-    Output: returns hex value of ASCII character
+    Output: returns hex value of ASCII character or character
     """
     ret = tables.petToAscTable[in_byte]
     logging.debug("petscii byte: %s to %s" % (in_byte, ret))
-    return ret
+    if result_type == 'default':
+        return ret
+    else:
+        return chr(ret)
 
 
 def asc_to_pet_b_arr(in_bytes, result_type='default'):
@@ -59,18 +62,21 @@ def asc_to_pet_b_arr(in_bytes, result_type='default'):
         return ret_str
 
 
-def asc_to_pet_b(in_byte):
+def asc_to_pet_b(in_byte,result_type='default'):
     """
     Purpose: converts PETSCII byte/unicode to ASCII
     Input: single byte/hex value
-    Output: returns hex value of ASCII character
+    Output: returns hex value of ASCII character or character
     """
     ret = tables.ascToPetTable[in_byte]
     logging.debug("ascii byte: %s to %s" % (in_byte, ret))
-    return ret
+    if result_type == 'default':
+        return ret
+    else:
+        return chr(ret)
 
 
-def pet_to_asc_c(in_char):
+def pet_to_asc_c(in_char, result_type='default'):
     """
     Purpose: converts PETSCII character to ASCII
     Input: single character/hex value
@@ -84,7 +90,10 @@ def pet_to_asc_c(in_char):
         return -1
     ret = tables.petToAscTable[ord(in_char)]
     logging.debug("pet character: " + str(ord(in_char)) + " to " + str(chr(ret)))
-    return ret
+    if result_type == 'default':
+        return ret
+    else:
+        return chr(ret)
 
 
 def pet_to_asc_s(in_str, result_type='default'):
@@ -107,7 +116,7 @@ def pet_to_asc_s(in_str, result_type='default'):
         return ret_str
 
 
-def asc_to_pet_c(in_char):
+def asc_to_pet_c(in_char, result_type='default'):
     """
     Purpose: converts ASCII character to PETSCII
     Input: single character/hex value
@@ -121,7 +130,10 @@ def asc_to_pet_c(in_char):
         return -1
     ret = tables.ascToPetTable[ord(in_char)]
     logging.debug("ascii character: " + str(in_char) + " to " + str(ret))
-    return ret
+    if result_type == 'default':
+        return ret
+    else:
+        return chr(ret)
 
 
 def asc_to_pet_s(in_str, result_type='default'):

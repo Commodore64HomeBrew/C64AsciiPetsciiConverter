@@ -80,6 +80,7 @@ class Test(unittest.TestCase):
         self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
         pass
     
+    #test byte to byte ascii to petscii
     def testAscToPetByteToByte(self):
         send_test_msg_bytes=self.conv.get_bytes("h")
         trans_msg=72
@@ -87,14 +88,61 @@ class Test(unittest.TestCase):
         self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
         pass
     
-    #this test case sends all capitals ... which translates to petscii very nicely in either upper or lower case (depends on C64 shift mode)
+    #test byte to byte petscii to ascii
     def testPetToAscByteToByte(self):
         send_test_msg=self.conv.get_bytes("H")
         trans_msg=104
         result= self.conv.pet_to_asc_b(send_test_msg[0])
         self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
         pass
-
+    
+    #test byte to char ascii to petscii
+    def testAscToPetByteToChar(self):
+        send_test_msg_bytes=self.conv.get_bytes("h")
+        trans_msg="H"
+        result= self.conv.asc_to_pet_b(send_test_msg_bytes[0],result_type='char')
+        self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
+        pass
+    
+    #test byte to char petscii to ascii
+    def testPetToAscByteToChar(self):
+        send_test_msg=self.conv.get_bytes("H")
+        trans_msg="h"
+        result= self.conv.pet_to_asc_b(send_test_msg[0],result_type='char')
+        self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
+        pass
+    
+    #test char to byte ascii to petscii
+    def testAscToPetCharToByte(self):
+        send_test_msg_char="h"
+        trans_msg=72
+        result= self.conv.asc_to_pet_c(send_test_msg_char)
+        self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
+        pass
+    
+    #test char to byte petscii to ascii
+    def testPetToAscCharToByte(self):
+        send_test_msg_char="H"
+        trans_msg=104
+        result= self.conv.pet_to_asc_c(send_test_msg_char)
+        self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
+        pass 
+    
+    #test char to char ascii to petscii
+    def testAscToPetCharToChar(self):
+        send_test_msg_char="h"
+        trans_msg="H"
+        result= self.conv.asc_to_pet_c(send_test_msg_char,result_type='char')
+        self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
+        pass
+    
+    #test char to char petscii to ascii
+    def testPetToAscCharToChar(self):
+        send_test_msg_char="H"
+        trans_msg="h"
+        result= self.conv.pet_to_asc_c(send_test_msg_char,result_type='char')
+        self.assertEqual(result, trans_msg, "Message %s not as expected %s"%(result,trans_msg))
+        pass
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
